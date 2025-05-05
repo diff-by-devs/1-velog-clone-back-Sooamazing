@@ -47,20 +47,32 @@ jobs:
     #
     # - name: Build with Gradle 8.9
     #   run: gradle build
-    
-    - name: gradlew 실행 권한 설정 # !! 수정
+
+  test:   
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: JDK 21 세팅 
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21' 
+        distribution: 'temurin' 
+
+    - name: gradlew 실행 권한 설정 
       run: chmod +x gradlew
  
-    - name: 테스트 진행 # !! 수정
+    - name: 테스트 진행 
       run: ./gradlew --info test
       
-    - name: 테스트 결과 Report # !! 수정
+    - name: 테스트 결과 Report 
       uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()  # 테스트가 실패하여도 Report를 보기 위해 `always`로 설정
+      if: always()  # 테스트가 실패해도 Report를 보기 위해 `always`로 설정
       with:
          files: 'build/test-results/**/*.xml'
     
-    - name: 테스트 실패 Comment # !! 수정
+    - name: 테스트 실패 Comment 
       uses: mikepenz/action-junit-report@v3
       if: always()
       with:
