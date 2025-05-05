@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Feature request
-title: "[Feature]"
+title: "[Feature] "
 labels: Feature
 assignees: Sooamazing
 
@@ -23,4 +23,4 @@ assignees: Sooamazing
 -->
 
 ## 이슈 생성 시 확인하기
-[ ] Assignees, labe, project, milestone 할당했나요?
+- [ ] Assignees, labe, project, milestone 할당했나요?
