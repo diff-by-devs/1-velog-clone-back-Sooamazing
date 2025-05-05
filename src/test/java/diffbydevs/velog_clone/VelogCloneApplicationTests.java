@@ -10,4 +10,9 @@ class VelogCloneApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void tests() {
+
+	}
+
 }
