@@ -12,7 +12,7 @@ class VelogCloneApplicationTests {
 
 	@Test
 	void tests() {
-
+		throw new IllegalArgumentException();
 	}
 
 }
