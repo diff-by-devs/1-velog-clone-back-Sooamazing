@@ -49,8 +49,11 @@ jobs:
 
     # 참고: https://ttl-blog.tistory.com/1350
     # Report 결과 쓰기 위해 필요
+    # 참고: https://github.com/mikepenz/action-junit-report/issues/23
     permissions:
+      contents: read
       checks: write
+      id-token: write
       pull-requests: write
 
     steps:
