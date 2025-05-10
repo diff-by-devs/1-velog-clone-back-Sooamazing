@@ -35,7 +35,7 @@ jobs:
     # for test report comment for fork repo
     # ref: https://github.com/mikepenz/action-junit-report
     - name: Upload Test Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always() # always run even if the previous step fails
       with:
         name: junit-test-results
