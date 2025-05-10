@@ -49,8 +49,11 @@ jobs:
 
     # 참고: https://ttl-blog.tistory.com/1350
     # Report 결과 쓰기 위해 필요
+    # 참고: https://github.com/mikepenz/action-junit-report/issues/23
     permissions:
+      contents: read
       checks: write
+      id-token: write
       pull-requests: write
 
     steps:
@@ -73,8 +76,14 @@ jobs:
       with:
          files: 'build/test-results/**/*.xml'
     
-    - name: 테스트 실패 Comment 
-      uses: mikepenz/action-junit-report@v3
-      if: always()
+    - name: 테스트 Comment - clone repo
+      uses: mikepenz/action-junit-report@v5
+      if: ${{ always() &&  (github.event.pull_request.head.repo.full_name == github.repository) }}
       with:
-        report_paths: 'build/test-results/test/TEST-*.xml'
+        report_paths: '**/build/test-results/test/TEST-*.xml'
+
+    - name: Write out Unit Test report annotation for forked repo
+      if: ${{ failure() &&  (github.event.pull_request.head.repo.full_name != github.repository) }}
+      uses: mikepenz/action-junit-report@v5
+      with:
+        annotate_only: true # forked repo cannot write to checks so just do annotations
