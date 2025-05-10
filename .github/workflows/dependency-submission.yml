@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.SMTP_PASS }}
           subject: "Dependency Submission Failed"
           to: "healthy.joy.smile@gmail.com"
-          from: "GitHub Actions <@gmail.com>"
+          from: "GitHub Actions <healthy.joy.smile@gmail.com>"
           body: |
             The dependency submission job failed for PR:
             - Repository: ${{ github.repository }}
