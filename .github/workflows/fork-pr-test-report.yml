@@ -1,7 +1,7 @@
 name: fork-pr-test-report.yml
 on:
   workflow_run:
-    workflows: [ build ]
+    workflows: [ save-build ]
     types: [ completed ]
 
 permissions:
