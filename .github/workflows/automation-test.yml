@@ -10,12 +10,7 @@ name: Java CI with Gradle
 on:
   pull_request:
     branches: [ "main" ]
-# 참고: https://ttl-blog.tistory.com/1350
-# Report 결과 쓰기 위해 필요
-permissions:
-  checks: write
-  pull-requests: write
-  
+
 jobs:
   build:
 
@@ -52,6 +47,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    # 참고: https://ttl-blog.tistory.com/1350
+    # Report 결과 쓰기 위해 필요
+    permissions:
+      checks: write
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v4
     - name: JDK 21 세팅 
@@ -77,22 +78,3 @@ jobs:
       if: always()
       with:
         report_paths: 'build/test-results/test/TEST-*.xml'
-
-  dependency-submission:
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-
-    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
