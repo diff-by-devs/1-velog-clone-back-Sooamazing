@@ -10,8 +10,19 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Build and Run Tests
-        run: # execute your tests generating test results
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: gradlew 실행 권한 설정
+        run: chmod +x gradlew
+
+      - name: 테스트 진행
+        run: ./gradlew --info test
+
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
         if: always() # always run even if the previous step fails
