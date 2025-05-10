@@ -1,4 +1,4 @@
-name: dependency-submission.yml
+name: dependency-submission
 
 on:
   pull_request:

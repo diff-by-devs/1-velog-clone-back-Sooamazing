@@ -10,9 +10,4 @@ class VelogCloneApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void testFail() throws IllegalAccessException {
-		throw new IllegalAccessException();
-	}
-
 }
