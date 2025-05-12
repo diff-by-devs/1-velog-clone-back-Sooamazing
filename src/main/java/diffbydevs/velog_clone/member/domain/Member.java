@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +36,14 @@ public class Member extends BaseEntityOnlyUpdatedAt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	/**
+	 * 회원 가입, 로그인 등 인증 시 사용하는 이메일 형식의 아이디
+	 */
+	@NotNull
+	@Email
+	@Column(unique = true, length = 150)
+	private String accountId;
+
 	@Column(columnDefinition = "tinyint(1) unsigned default 0")
 	private int status;
 
@@ -44,9 +54,12 @@ public class Member extends BaseEntityOnlyUpdatedAt {
 	 * </p>
 	 * @return Member 회원 가입한 Member
 	 */
-	public static Member signUp() {
+	public static Member signUp(String accountId) {
 		Member member = new Member();
+
+		member.accountId = accountId;
 		member.status = MemberStatus.ACTIVE.getValueInDB();
+
 		return member;
 	}
 
