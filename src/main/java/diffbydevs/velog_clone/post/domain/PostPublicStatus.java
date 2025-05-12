@@ -23,7 +23,7 @@ public enum PostPublicStatus {
 	/**
 	 * 실제로 db에 들어가게 되는 값
 	 */
-	private int valueInDB;
+	private final int valueInDB;
 
 	PostPublicStatus(int valueInDB) {
 		this.valueInDB = valueInDB;
