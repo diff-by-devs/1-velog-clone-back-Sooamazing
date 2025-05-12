@@ -25,7 +25,7 @@ TODO
  */
 @Getter
 @Entity
-@Table(name = "member.user")
+@Table(name = "member_user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member extends BaseEntityOnlyUpdatedAt {
