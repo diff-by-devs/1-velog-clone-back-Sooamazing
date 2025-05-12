@@ -5,6 +5,7 @@ import java.io.Serializable;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,10 +29,12 @@ module과 package level은 동일하다고 함.
 @EqualsAndHashCode
 class MemberRelationPK implements Serializable {
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "follower_id")
 	private Member follower;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "following")
 	private Member following;
