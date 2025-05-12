@@ -19,6 +19,7 @@ TODO
 - query에서 Status에 check 제약도 함께 걸리는지 확인 필요.
 - 회원 CRUD 진행 시 Profile 등 생성 방식 고민 필요.
  */
+
 /**
  * 회원 Entity 중 근간이 되는 Entity. 
  * <p>

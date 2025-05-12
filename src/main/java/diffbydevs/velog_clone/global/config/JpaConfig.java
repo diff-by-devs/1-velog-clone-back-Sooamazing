@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * )
  * - DataJpaTest 시 Main을 import하게 되면, 단위 테스트의 의미가 없어짐.
  */
+
 /**
  * JPA 설정
  * <p>
