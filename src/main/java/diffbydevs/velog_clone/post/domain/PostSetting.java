@@ -62,7 +62,7 @@ public class PostSetting extends BaseEntity {
 	 * 공개, 비공개 설정
 	 */
 	@NotNull
-	@Column(columnDefinition = "tinyint(1) unsigned")
+	@Column(columnDefinition = "tinyint(1) unsigned default 0")
 	private int isPublic;
 
 	/*

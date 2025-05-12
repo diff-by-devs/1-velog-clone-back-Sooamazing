@@ -56,7 +56,7 @@ public class Post {
 	@JoinColumn(name = "series_id")
 	private Series series;
 
-	@Column(columnDefinition = "tinyint(1) unsigned")
+	@Column(columnDefinition = "tinyint(1) unsigned default 0")
 	private int publishedStatus;
 
 	/**
