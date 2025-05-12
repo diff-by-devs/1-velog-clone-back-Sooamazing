@@ -2,7 +2,7 @@ package diffbydevs.velog_clone.tag.domain;
 
 import diffbydevs.velog_clone.blog.domain.Blog;
 import diffbydevs.velog_clone.global.domain.BaseEntityOnlyCreatedAt;
-import diffbydevs.velog_clone.post.domain.PostPublishedInfo;
+import diffbydevs.velog_clone.post.domain.Post;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
@@ -30,7 +30,7 @@ public class BlogPostTag extends BaseEntityOnlyCreatedAt {
 	 * @param post 태그를 붙일 게시글
 	 * @return 블로그 게시글에 붙인 태그
 	 */
-	public static BlogPostTag tagAPost(Tag tag, Blog blog, PostPublishedInfo post) {
+	public static BlogPostTag tagAPost(Tag tag, Blog blog, Post post) {
 		BlogPostTag blogPostTag = new BlogPostTag();
 
 		blogPostTag.id = BlogPostTagPK.tagAPost(tag, blog, post);

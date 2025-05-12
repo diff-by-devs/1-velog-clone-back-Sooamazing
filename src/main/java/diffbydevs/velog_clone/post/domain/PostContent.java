@@ -32,8 +32,8 @@ public class PostContent extends BaseEntityOnlyUpdatedAt {
 
 	@NotNull
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_published_info_id")
-	private PostPublishedInfo postPublishedInfo;
+	@JoinColumn(name = "post_id")
+	private Post post;
 
 	@Lob
 	private String content;
@@ -41,14 +41,14 @@ public class PostContent extends BaseEntityOnlyUpdatedAt {
 	/**
 	 * 게시글의 내용을 작성합니다.
 	 *
-	 * @param postPublishedInfo 게시글 메타 정보
+	 * @param post 게시글 메타 정보
 	 * @param content 작성하고 싶은 게시글 내용
 	 * @return 작성한 게시글 내용
 	 */
-	public static PostContent createPostContent(PostPublishedInfo postPublishedInfo, String content) {
+	public static PostContent createPostContent(Post post, String content) {
 		PostContent postContent = new PostContent();
 
-		postContent.postPublishedInfo = postPublishedInfo;
+		postContent.post = post;
 		postContent.content = content;
 
 		return postContent;

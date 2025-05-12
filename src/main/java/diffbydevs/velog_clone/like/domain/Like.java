@@ -2,7 +2,7 @@ package diffbydevs.velog_clone.like.domain;
 
 import diffbydevs.velog_clone.global.domain.BaseEntityOnlyCreatedAt;
 import diffbydevs.velog_clone.member.domain.Member;
-import diffbydevs.velog_clone.post.domain.PostPublishedInfo;
+import diffbydevs.velog_clone.post.domain.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,8 +38,8 @@ public class Like extends BaseEntityOnlyCreatedAt {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_published_info_id")
-	private PostPublishedInfo post;
+	@JoinColumn(name = "post_id")
+	private Post post;
 
 	/**
 	 * 게시글에 좋아요를 누릅니다.
@@ -51,7 +51,7 @@ public class Like extends BaseEntityOnlyCreatedAt {
 	 * @param post 좋아요할 게시글 메타 정보
 	 * @return 좋아요한 날짜를 포함한 정보
 	 */
-	public static Like likeThePost(Member member, PostPublishedInfo post) {
+	public static Like likeThePost(Member member, Post post) {
 		Like like = new Like();
 
 		like.member = member;

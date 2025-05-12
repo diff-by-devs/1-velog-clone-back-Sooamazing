@@ -35,7 +35,7 @@ TODO
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostPublishedInfo {
+public class Post {
 
 	@Id
 	@Column(columnDefinition = "int unsigned")
@@ -73,24 +73,24 @@ public class PostPublishedInfo {
 	 * @param publishedStatus 발행 상태
 	 * @return 게시글의 발행 정보
 	 */
-	public static PostPublishedInfo createPost(
+	public static Post createPost(
 		Blog blog,
 		Member author,
 		Series series,
 		PostPublishedStatus publishedStatus
 	) {
-		PostPublishedInfo postPublishedInfo = new PostPublishedInfo();
+		Post post = new Post();
 
-		postPublishedInfo.blog = blog;
-		postPublishedInfo.author = author;
-		postPublishedInfo.series = series;
-		postPublishedInfo.publishedStatus = publishedStatus.getValueInDB();
-		postPublishedInfo.publishedAt = null;
+		post.blog = blog;
+		post.author = author;
+		post.series = series;
+		post.publishedStatus = publishedStatus.getValueInDB();
+		post.publishedAt = null;
 		if (publishedStatus == PostPublishedStatus.PUBLISHED) {
-			postPublishedInfo.publishedAt = LocalDateTime.now();
+			post.publishedAt = LocalDateTime.now();
 		}
 
-		return postPublishedInfo;
+		return post;
 	}
 
 	/**
@@ -101,23 +101,23 @@ public class PostPublishedInfo {
 	 * @param publishedStatus 발행 상태
 	 * @return 게시글의 발행 정보
 	 */
-	public static PostPublishedInfo createPost(
+	public static Post createPost(
 		Blog blog,
 		Member author,
 		PostPublishedStatus publishedStatus
 	) {
-		PostPublishedInfo postPublishedInfo = new PostPublishedInfo();
+		Post post = new Post();
 
-		postPublishedInfo.blog = blog;
-		postPublishedInfo.author = author;
-		postPublishedInfo.series = null;
-		postPublishedInfo.publishedStatus = publishedStatus.getValueInDB();
-		postPublishedInfo.publishedAt = null;
+		post.blog = blog;
+		post.author = author;
+		post.series = null;
+		post.publishedStatus = publishedStatus.getValueInDB();
+		post.publishedAt = null;
 
 		if (publishedStatus == PostPublishedStatus.PUBLISHED) {
-			postPublishedInfo.publishedAt = LocalDateTime.now();
+			post.publishedAt = LocalDateTime.now();
 		}
 
-		return postPublishedInfo;
+		return post;
 	}
 }

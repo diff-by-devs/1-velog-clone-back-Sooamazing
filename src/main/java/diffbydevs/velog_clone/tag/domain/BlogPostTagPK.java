@@ -1,7 +1,7 @@
 package diffbydevs.velog_clone.tag.domain;
 
 import diffbydevs.velog_clone.blog.domain.Blog;
-import diffbydevs.velog_clone.post.domain.PostPublishedInfo;
+import diffbydevs.velog_clone.post.domain.Post;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -34,6 +34,6 @@ class BlogPostTagPK {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_published_info_id")
-	private PostPublishedInfo post;
+	@JoinColumn(name = "post_id")
+	private Post post;
 }

@@ -39,8 +39,8 @@ public class PostSetting extends BaseEntity {
 
 	@NotNull
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_published_info_id")
-	private PostPublishedInfo postPublishedInfo;
+	@JoinColumn(name = "post_id")
+	private Post post;
 
 	/**
 	 * 글 제목
@@ -79,6 +79,7 @@ public class PostSetting extends BaseEntity {
 	/**
 	 * 게시글 환경을 설정합니다.
 	 *
+	 * @param post 환경 설정할 게시글
 	 * @param title 글 제목
 	 * @param brieflyIntroduce 글 간단 소개
 	 * @param postPublicStatus 공개/비공개
@@ -86,6 +87,7 @@ public class PostSetting extends BaseEntity {
 	 * @return 게시글 환경 설정
 	 */
 	public static PostSetting setThePostEnvironment(
+		Post post,
 		String title,
 		String brieflyIntroduce,
 		PostPublicStatus postPublicStatus,
@@ -93,6 +95,7 @@ public class PostSetting extends BaseEntity {
 	) {
 		PostSetting postSetting = new PostSetting();
 
+		postSetting.post = post;
 		postSetting.title = title;
 		postSetting.brieflyIntroduce = brieflyIntroduce;
 		postSetting.isPublic = postPublicStatus.getValueInDB();

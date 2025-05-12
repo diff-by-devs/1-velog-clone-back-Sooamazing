@@ -2,7 +2,7 @@ package diffbydevs.velog_clone.comment.domain;
 
 import diffbydevs.velog_clone.global.domain.BaseEntity;
 import diffbydevs.velog_clone.member.domain.Member;
-import diffbydevs.velog_clone.post.domain.PostPublishedInfo;
+import diffbydevs.velog_clone.post.domain.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,8 +42,8 @@ public class Comment extends BaseEntity {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_published_info_id")
-	private PostPublishedInfo post;
+	@JoinColumn(name = "post_id")
+	private Post post;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -83,7 +83,7 @@ public class Comment extends BaseEntity {
 	 * @return 남긴 댓글
 	 */
 	public static Comment leaveComment(
-		PostPublishedInfo post,
+		Post post,
 		Member commenter,
 		String content
 	) {
@@ -112,7 +112,7 @@ public class Comment extends BaseEntity {
 	 * @return 남긴 댓글
 	 */
 	public static Comment leaveComment(
-		PostPublishedInfo post,
+		Post post,
 		Member commenter,
 		Comment parentComment,
 		String content,
