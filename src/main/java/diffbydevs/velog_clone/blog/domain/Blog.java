@@ -48,9 +48,10 @@ public class Blog extends BaseEntity {
 	/**
 	 * 블로그 이름
 	 * slug로도 사용됨.
+	 * 영어 소문자, 숫자, - 사용 가능.
 	 */
 	@NotNull
-	@Pattern(regexp = "[a-z0-9-]")
+	@Pattern(regexp = "^[a-z0-9-]*$")
 	@Size(max = 60)
 	@Column(unique = true, length = 60)
 	private String name;

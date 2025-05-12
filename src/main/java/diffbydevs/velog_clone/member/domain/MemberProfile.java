@@ -52,9 +52,10 @@ public class MemberProfile extends BaseEntity {
 	/**
 	 * 별명.
 	 * slug로도 사용됨.
+	 * 영어 소문자, 숫자, - 사용 가능.
 	 */
 	@NotNull
-	@Pattern(regexp = "[a-z0-9-]")
+	@Pattern(regexp = "^[a-z0-9-]*$")
 	@Size(max = 50)
 	@Column(length = 50, unique = true)
 	private String nickname;
