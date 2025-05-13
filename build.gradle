@@ -44,12 +44,14 @@ dependencies {
     // properties의 driver과 연동이 안 됨.
     // (공부) mysql 버전은 내 로컬 mysql 버전과 관계 없는 건지. 내 로컬에 맞춰서 connector-j 사용.
     // https://kimslab01.tistory.com/23
-    implementation 'com.mysql:mysql-connector-j'
+//    implementation 'com.mysql:mysql-connector-j'
 
     // @Size, @NotNull 등 제약 조건 사용 위해 validation 추가
     // Hibernate에서 제공하는 @Length 내부도 보면 validation 사용하고 있음.
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+    // mysql 대신 H2 사용
+    runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
