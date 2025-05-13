@@ -1,0 +1,46 @@
+name: dependency-submission
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  dependency-submission:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Generate and submit dependency graph
+        id: dependency-submission
+        uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+      - name: Send Email Notification on Failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          subject: "Dependency Submission Failed"
+          to: "healthy.joy.smile@gmail.com"
+          from: "GitHub Actions <healthy.joy.smile@gmail.com>"
+          body: |
+            The dependency submission job failed for PR:
+            - Repository: ${{ github.repository }}
+            - PR Number: ${{ github.event.pull_request.number }}
+            - PR Title: ${{ github.event.pull_request.title }}
+
+      - name: Rollback Changes on Failure
+        if: failure()
+        run: |
+          git revert --no-commit HEAD
+          git commit -m "Revert: Dependency submission failed"
+          git push origin main
