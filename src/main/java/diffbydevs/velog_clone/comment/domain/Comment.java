@@ -25,10 +25,11 @@ TODO
 3. Level +1 하고, 안 되는지 확인하는 건 어디서 책임을 질까?
 4. 게시글, 상위 댓글이 삭제됐는지도 확인해.
 5. ParentComment 쿼리 null 맞는지 확인하기
+6. (공부) comment는 Mysql 예약어라 테이블 이름이 따로 필요함.
  */
 
 /**
- * 댓글을 관리합니다.
+ * 회원이 남긴 댓글입니다.
  */
 @Getter
 @Entity
@@ -64,7 +65,10 @@ public class Comment extends BaseEntity {
 	private String content;
 
 	/**
-	 * 댓글 레벨(댓글, 대댓글, 대대댓글)
+	 * 댓글 계층 - {@link CommentLevel#COMMENT 댓글},
+	 * {@link CommentLevel#REPLY 대댓글},
+	 * {@link CommentLevel#LAST_REPLY 대대댓글}
+	 * @see CommentLevel
 	 */
 	@NotNull
 	@Column(columnDefinition = "tinyint(1) unsigned default 0")
@@ -72,6 +76,7 @@ public class Comment extends BaseEntity {
 
 	/**
 	 * 댓글 삭제 여부
+	 * @see CommentActiveStatus
 	 */
 	@Column(columnDefinition = "tinyint(1) unsigned default 0")
 	private int isDeleted;

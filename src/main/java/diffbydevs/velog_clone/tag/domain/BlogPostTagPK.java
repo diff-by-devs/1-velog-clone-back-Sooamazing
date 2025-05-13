@@ -13,12 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 볼로그 게시글 태그의 복합키를 관리합니다.
- * 해당 패키지 외부에서 PK를 만들 일은 없어야 하기에 package-private으로 package 내에서만 사용 가능합니다.
+ * 볼로그 게시글 태그의 복합 PK입니다.
+ * package-private 설정해 해당 패키지 외부에서 PK에 접근할 수 없습니다.
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PACKAGE, staticName = "tagAPost")
+@AllArgsConstructor(access = AccessLevel.PACKAGE, staticName = "addTagTo")
 @EqualsAndHashCode
 class BlogPostTagPK {
 

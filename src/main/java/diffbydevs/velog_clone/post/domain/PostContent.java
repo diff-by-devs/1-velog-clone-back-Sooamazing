@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 게시글의 내용을 저장합니다.
+ * 게시글 내용입니다.
  */
 @Getter
 @Entity
@@ -39,10 +39,10 @@ public class PostContent extends BaseEntityOnlyUpdatedAt {
 	private String content;
 
 	/**
-	 * 게시글의 내용을 작성합니다.
+	 * 게시글 내용을 작성합니다.
 	 *
-	 * @param post 게시글 메타 정보
-	 * @param content 작성하고 싶은 게시글 내용
+	 * @param post 게시글 메타 데이터
+	 * @param content 작성할 게시글 내용
 	 * @return 작성한 게시글 내용
 	 */
 	public static PostContent createPostContent(Post post, String content) {

@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 블로그의 게시글 태그를 관리합니다.
+ * 블로그의 게시글 태그입니다.
  */
 @Getter
 @Entity
@@ -23,17 +23,17 @@ public class BlogPostTag extends BaseEntityOnlyCreatedAt {
 	private BlogPostTagPK id;
 
 	/**
-	 * 블로그 게시글에 태그를 붙입니다.
+	 * 블로그 게시글에 태그를 추가합니다.
 	 *
-	 * @param tag 게시글에 붙일 태그
+	 * @param tag 게시글에 추가할 태그
 	 * @param blog 게시글을 작성할 블로그
-	 * @param post 태그를 붙일 게시글
-	 * @return 블로그 게시글에 붙인 태그
+	 * @param post 태그를 추가할 게시글
+	 * @return 블로그 게시글에 추가한 태그
 	 */
-	public static BlogPostTag tagAPost(Tag tag, Blog blog, Post post) {
+	public static BlogPostTag addTagTo(Tag tag, Blog blog, Post post) {
 		BlogPostTag blogPostTag = new BlogPostTag();
 
-		blogPostTag.id = BlogPostTagPK.tagAPost(tag, blog, post);
+		blogPostTag.id = BlogPostTagPK.addTagTo(tag, blog, post);
 
 		return blogPostTag;
 	}

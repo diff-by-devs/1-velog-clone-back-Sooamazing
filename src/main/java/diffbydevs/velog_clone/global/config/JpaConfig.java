@@ -13,12 +13,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 
 /**
- * JPA 설정
+ * JPA 설정을 관리합니다.
  * <p>
- * 생성일, 수정일 자동 관리 기능 이용 위해 JPA Auditing 설정.
- * 설정을 각각 관리하고, 모아서 확인하기 위해 main이 아니라 config로 관리.
+ *     생성일, 수정일 자동 관리 기능을 이용하기 위해 JPA Auditing을 설정합니다.
+ *    설정을 각각 관리하고, 모아서 확인하기 위해 main이 아니라 config로 관리합니다.
  * </p>
- * @see diffbydevs.velog_clone.global.domain.BaseEntity  AuditingEntityListener 사용한 BaseEntity
+ * @see diffbydevs.velog_clone.global.domain.BaseEntity  AuditingEntityListener 사용한 BaseEntity 예시
  */
 @Configuration
 @EnableJpaAuditing

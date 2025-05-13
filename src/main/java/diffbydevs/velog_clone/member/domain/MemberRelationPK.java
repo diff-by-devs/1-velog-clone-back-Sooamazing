@@ -20,8 +20,8 @@ module과 package level은 동일하다고 함.
  */
 
 /**
- * 회원 관계에서 복합 PK 생성을 위한 클래스.
- * 해당 패키지 외부에서 PK를 만들 일은 없어야 하기에 package-private으로 package 내에서만 사용 가능합니다.
+ * 회원 간 팔로우 관계의 복합 PK입니다.
+ * package-private 설정해 해당 패키지 외부에서 PK에 접근할 수 없습니다.
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

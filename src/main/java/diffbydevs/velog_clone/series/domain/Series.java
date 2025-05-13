@@ -18,9 +18,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 블로그 내 글을 모아 볼 수 있는 시리즈.
+ * 블로그 내 글을 모을 수 있는 시리즈입니다.
  * <p>
- *     블로그 주인이 직접 만들고, 수정하고, 삭제할 수 있습니다.
+ *     블로그 주인이 직접 관리합니다.
  * </p>
  */
 @Getter
@@ -40,10 +40,7 @@ public class Series extends BaseEntity {
 	private Blog blog;
 
 	/**
-	 * 시리즈 이름
-	 * <p>
-	 *     slug로 사용됨.
-	 * </p>
+	 * 시리즈 이름, 고유 slug로 사용.
 	 */
 	@NotNull
 	@Size(max = 50)
@@ -51,11 +48,11 @@ public class Series extends BaseEntity {
 	private String name;
 
 	/**
-	 * 시리즈를 만듭니다.
+	 * 새로운 시리즈를 만듭니다.
 	 *
-	 * @param blog 시리즈를 만들 블로그
+	 * @param blog 시리즈가 속할 블로그
 	 * @param name 시리즈 이름
-	 * @return 생성된 시리즈
+	 * @return 새로운 시리즈
 	 */
 	public static Series createSeries(Blog blog, String name) {
 		Series series = new Series();

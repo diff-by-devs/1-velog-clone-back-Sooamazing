@@ -8,12 +8,13 @@ import lombok.Getter;
  *     코드의 가독성을 위해 어플리케이션 코드에서만 사용합니다.
  *     실제 db에서는 정규화 문제로 ENUM이 아닌 정수형으로 관리합니다.
  * </p>
+ * @see Comment#isDeleted
  */
 @Getter
 public enum CommentActiveStatus {
 
 	/**
-	 * 댓글 게시 중인 상태
+	 * 댓글 게시 중
 	 */
 	ACTIVE(0),
 	/**

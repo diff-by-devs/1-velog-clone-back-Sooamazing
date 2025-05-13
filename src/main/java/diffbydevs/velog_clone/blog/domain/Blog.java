@@ -24,9 +24,9 @@ TODO
  */
 
 /**
- * 회원 가입시 자동으로 생성되는 블로그
+ * 회원 가입시 자동으로 생성되는 블로그 메타 데이터입니다.
  * <p>
- *     현재는 회원 한 명 당 하나만 생성 가능하다.
+ *     현재는 회원 한 명 당 하나만 생성 가능합니다.
  * </p>
  *
  */
@@ -66,11 +66,11 @@ public class Blog extends BaseEntity {
 	private String introduce;
 
 	/**
-	 * 블로그를 엽니다.
+	 * 블로그를 개설합니다.
 	 *
 	 * @param member 가입한 회원
 	 * @param name 블로그 이름
-	 * @return Blog 생성된 블로그
+	 * @return 생성된 블로그 메타 데이터
 	 */
 	public static Blog openBlog(Member member, String name) {
 		Blog blog = new Blog();

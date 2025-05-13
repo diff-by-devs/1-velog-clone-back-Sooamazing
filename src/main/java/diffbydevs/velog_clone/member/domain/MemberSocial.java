@@ -30,14 +30,14 @@ TODO
  */
 
 /**
- * 회원이 직접 입력하고, 외부에 보이는 social 정보
- *
+ * 회원이 관리하고, 외부에 공개하는 social 정보입니다.
  */
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberSocial extends BaseEntityOnlyUpdatedAt {
+
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,7 +81,7 @@ public class MemberSocial extends BaseEntityOnlyUpdatedAt {
 	private String homepage;
 
 	/**
-	 * 회원의 social 정보를 최초로 작성하는(MemberSocial 생성) 정적 팩토리 메서드.
+	 * 회원의 social 정보를 작성합니다.
 	 *
 	 * @param member 회원
 	 * @param email email

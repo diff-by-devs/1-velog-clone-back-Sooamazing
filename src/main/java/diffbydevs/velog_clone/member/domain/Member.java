@@ -20,7 +20,7 @@ TODO
  */
 
 /**
- * 회원 Entity 중 근간이 되는 Entity. 
+ * 회원의 메타 데이터입니다.
  * <p>
  *     회원에 대해 외부와 통신 시 해당 id로 통신합니다.
  * </p>
@@ -30,6 +30,7 @@ TODO
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member extends BaseEntityOnlyUpdatedAt {
+
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,15 +44,16 @@ public class Member extends BaseEntityOnlyUpdatedAt {
 	@Column(unique = true, length = 150)
 	private String accountId;
 
+	/**
+	 * 회원의 활성, 휴면, 탈퇴 상태
+	 * @see MemberStatus
+	 */
 	@Column(columnDefinition = "tinyint(1) unsigned default 0")
 	private int status;
 
 	/**
-	 * Member를 생성하는(회원 가입하는) 정적 팩토리 메서드.
-	 * <p>
-	 *     Member 생성은 오직 이 메서드로만 가능합니다.
-	 * </p>
-	 * @return Member 회원 가입한 Member
+	 * 회원 가입합니다.
+	 * @return 회원 가입한 회원의 메타 데이터
 	 */
 	public static Member signUp(String accountId) {
 		Member member = new Member();

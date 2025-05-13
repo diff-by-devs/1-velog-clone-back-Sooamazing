@@ -18,8 +18,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+# 공부
+likes는 mysql 예약어라 테이블 이름이 따로 필요함.
+ */
 /**
- * 회원이 게시글에 좋아요하는 기능을 관리합니다.
+ * 회원이 게시글에 좋아요하는 기록입니다.
  */
 @Getter
 @Entity
@@ -50,10 +54,10 @@ public class Like extends BaseEntityOnlyCreatedAt {
 	 * </p>
 	 *
 	 * @param member 좋아요 누른 회원
-	 * @param post 좋아요할 게시글 메타 정보
+	 * @param post 좋아요할 게시글 메타 데이터
 	 * @return 좋아요한 날짜를 포함한 정보
 	 */
-	public static Like likeThePost(Member member, Post post) {
+	public static Like likePost(Member member, Post post) {
 		Like like = new Like();
 
 		like.member = member;

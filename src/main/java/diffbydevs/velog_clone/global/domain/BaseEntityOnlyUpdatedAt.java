@@ -13,10 +13,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 수정일시를 자동으로 관리해 줍니다.
+ * {@link EntityListeners}를 사용해 수정일시를 자동으로 관리합니다.
  * <p>
- * 필요한 Entity에서 상속받기만 하면 자동으로 사용 가능합니다.
- * {@link MappedSuperclass}를 이용해 entity(테이블)이 따로 생성되지 않습니다.
+ *     Entity에서 상속받기만 하면 자동으로 사용 가능합니다.
+ *    {@link MappedSuperclass}를 이용해 별개의 entity(테이블)는 생성하지 않습니다.
  * </p>
  */
 @Getter

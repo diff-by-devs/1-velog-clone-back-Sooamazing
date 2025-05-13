@@ -28,7 +28,7 @@ TODO
  */
 
 /**
- * 회원이 직접 수정 가능한 프로필.
+ * 회원이 직접 수정 가능한 회원 정보입니다.
  * <p>
  *     가입일을 확인할 수 있습니다.
  * </p>
@@ -39,6 +39,7 @@ TODO
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberProfile extends BaseEntity {
+
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,8 +52,7 @@ public class MemberProfile extends BaseEntity {
 
 	/**
 	 * 별명.
-	 * slug로도 사용됨.
-	 * 영어 소문자, 숫자, - 사용 가능.
+	 * slug로 사용, 영어 소문자, 숫자, - 사용 가능.
 	 */
 	@NotNull
 	@Pattern(regexp = "^[a-z0-9-]*$")
@@ -60,17 +60,18 @@ public class MemberProfile extends BaseEntity {
 	@Column(length = 50, unique = true)
 	private String nickname;
 
+	/**
+	 * 회원에 대한 간단한 소개
+	 */
 	private String introduce;
 
 	/**
-	 * 회원의 프로필을 최초로 작성하는(MemberProfile 생성) 정적 팩토리 메서드.
-	 * <p>
-	 *     회원의 프로필 최초 작성은 오직 이 메서드로만 가능합니다.
-	 * </p>
+	 * 회원 가입하며 회원 프로필을 전부 작성합니다.
+	 *
 	 * @param member 회원
 	 * @param nickname 별명
 	 * @param introduce 회원 소개
-	 * @return 가입한 회원이 작성한 프로필
+	 * @return 회원 가입 시 작성한 프로필
 	 */
 	public static MemberProfile createProfile(Member member, String nickname, String introduce) {
 		MemberProfile memberProfile = new MemberProfile();
@@ -78,6 +79,25 @@ public class MemberProfile extends BaseEntity {
 		memberProfile.member = member;
 		memberProfile.nickname = nickname;
 		memberProfile.introduce = introduce;
+
+		return memberProfile;
+	}
+
+	/**
+	 * 회원 가입하며 회원 프로필에 별명만 작성합니다.
+	 *
+	 * @param member 회원
+	 * @param nickname 별명
+	 * @return 회원 가입 시 작성한 프로필
+	 */
+	public static MemberProfile createProfile(Member member, String nickname) {
+		MemberProfile memberProfile = new MemberProfile();
+
+		memberProfile.member = member;
+		memberProfile.nickname = nickname;
+
+		// 기본값
+		memberProfile.introduce = null;
 
 		return memberProfile;
 	}

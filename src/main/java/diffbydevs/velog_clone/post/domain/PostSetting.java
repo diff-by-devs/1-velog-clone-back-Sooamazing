@@ -24,7 +24,7 @@ TODO
  */
 
 /**
- * 게시글의 환경 설정을 관리합니다.
+ * 게시글 관리 설정입니다.
  */
 @Getter
 @Entity
@@ -51,7 +51,7 @@ public class PostSetting extends BaseEntity {
 	private String title;
 
 	/**
-	 * 미리 보기에서 보여주는 글에 대한 짧은 소개
+	 * 미리 보기 등에서 활용할 글에 대한 짧은 소개
 	 */
 	@NotNull
 	@Size(max = 150)
@@ -60,6 +60,7 @@ public class PostSetting extends BaseEntity {
 
 	/**
 	 * 공개, 비공개 설정
+	 * @see PostPublicStatus
 	 */
 	@NotNull
 	@Column(columnDefinition = "tinyint(1) unsigned default 0")
@@ -67,8 +68,8 @@ public class PostSetting extends BaseEntity {
 
 	/*
 	 * 글의 고유 slug.
-	 * 한글, 영어 소문자, 숫자, - 허용합니다.
-	 * 작성하지 않으면, 기본으로 제목으로 시도합니다.
+	 * 한글, 영어 소문자, 숫자, - 허용.
+	 * 작성하지 않으면, 기본으로 제목으로 시도.
 	 */
 	@NotNull
 	@Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-]*$")
@@ -77,16 +78,16 @@ public class PostSetting extends BaseEntity {
 	private String slug;
 
 	/**
-	 * 게시글 환경을 설정합니다.
+	 * 게시글 관리 환경을 설정합니다.
 	 *
-	 * @param post 환경 설정할 게시글
-	 * @param title 글 제목
-	 * @param brieflyIntroduce 글 간단 소개
+	 * @param post 관리할 게시글
+	 * @param title 게시글 제목
+	 * @param brieflyIntroduce 게시글 간단 소개
 	 * @param postPublicStatus 공개/비공개
 	 * @param slug uri에 사용하는 slug
-	 * @return 게시글 환경 설정
+	 * @return 설정한 게시글 환경
 	 */
-	public static PostSetting setThePostEnvironment(
+	public static PostSetting setPostEnvironment(
 		Post post,
 		String title,
 		String brieflyIntroduce,

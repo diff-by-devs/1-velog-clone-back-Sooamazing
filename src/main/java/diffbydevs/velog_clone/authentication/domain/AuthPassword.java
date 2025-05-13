@@ -25,8 +25,8 @@ TODO
  */
 
 /**
- * 회원이 비밀 번호 형식으로 회원가입한 경우 사용합니다.
- * 암호화 방식을 적용해 비밀 번호를 저장하고, 확인합니다.
+ * 비밀 번호 형식으로 회원 가입한 회원의 인증 정보입니다.
+ * 암호화 방식을 적용해 비밀 번호를 저장하고, 로그인 시 확인합니다.
  */
 @Getter
 @Entity
@@ -65,7 +65,7 @@ public class AuthPassword extends BaseEntityOnlyUpdatedAt {
 	 *
 	 * @param member (방금 가입한) 회원
 	 * @param password 비밀번호
-	 * @return AuthPassword 비밀번호 방식으로 회원 가입한 정보
+	 * @return 비밀번호 방식으로 가입한 회원 정보
 	 */
 	public static AuthPassword signUpWithPassword(
 		Member member, String password

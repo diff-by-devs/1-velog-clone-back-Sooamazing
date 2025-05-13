@@ -17,7 +17,7 @@ TODO
  */
 
 /**
- * 회원끼리의 팔로우 관계를 표현합니다.
+ * 회원끼리의 팔로우 관계입니다.
  */
 @Getter
 @Entity
@@ -29,11 +29,11 @@ public class MemberRelationship extends BaseEntityOnlyCreatedAt {
 	private MemberRelationPK id;
 
 	/**
-	 * 회원이 다른 회원에게 팔로우를 요청합니다.
+	 * 회원이 다른 회원을 팔로우합니다.
 	 *
 	 * @param follower 팔로우 요청한 회원
 	 * @param following 팔로우 대상 회원
-	 * @return MemberRelationship 연결된 팔로우 관계
+	 * @return 팔로우 맺어진 회원들
 	 */
 	public static MemberRelationship follow(Member follower, Member following) {
 		MemberRelationship memberRelationship = new MemberRelationship();
