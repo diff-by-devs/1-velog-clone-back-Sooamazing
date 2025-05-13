@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -28,14 +27,13 @@ TODO
  */
 @Getter
 @Entity
-@Table(name = "member_user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member extends BaseEntityOnlyUpdatedAt {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/**
 	 * 회원 가입, 로그인 등 인증 시 사용하는 이메일 형식의 아이디

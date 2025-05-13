@@ -32,7 +32,7 @@ public class Series extends BaseEntity {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)

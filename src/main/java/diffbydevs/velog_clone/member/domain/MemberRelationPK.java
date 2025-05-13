@@ -36,7 +36,7 @@ class MemberRelationPK implements Serializable {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "following")
+	@JoinColumn(name = "following_id")
 	private Member following;
 
 }

@@ -42,7 +42,7 @@ public class MemberProfile extends BaseEntity {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotNull
 	@OneToOne(fetch = FetchType.LAZY)

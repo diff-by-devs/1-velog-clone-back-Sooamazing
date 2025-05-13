@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ TODO
  */
 @Getter
 @Entity
+@Table(name = "commments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Comment extends BaseEntity {
@@ -38,7 +40,7 @@ public class Comment extends BaseEntity {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +60,7 @@ public class Comment extends BaseEntity {
 	 * 댓글 내용
 	 */
 	@NotNull
-	@Column(columnDefinition = "varchar", length = 1000)
+	@Column(columnDefinition = "varchar(1000)")
 	private String content;
 
 	/**

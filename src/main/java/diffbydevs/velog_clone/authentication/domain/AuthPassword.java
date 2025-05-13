@@ -37,7 +37,7 @@ public class AuthPassword extends BaseEntityOnlyUpdatedAt {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotNull
 	@OneToOne(fetch = FetchType.LAZY)
@@ -49,7 +49,7 @@ public class AuthPassword extends BaseEntityOnlyUpdatedAt {
 	 */
 	@NotNull
 	@Size(max = 128)
-	@Column(columnDefinition = "CHAR", length = 128)
+	@Column(columnDefinition = "CHAR(128)")
 	private String password;
 
 	/**
@@ -57,7 +57,7 @@ public class AuthPassword extends BaseEntityOnlyUpdatedAt {
 	 */
 	@NotNull
 	@Size(max = 128)
-	@Column(columnDefinition = "CHAR", length = 128)
+	@Column(columnDefinition = "CHAR(128)")
 	private String salt;
 
 	/**

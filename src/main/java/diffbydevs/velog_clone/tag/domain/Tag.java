@@ -31,7 +31,7 @@ public class Tag extends BaseEntityOnlyCreatedAt {
 	@Id
 	@Column(columnDefinition = "int unsigned")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	/**
 	 * 태그 이름. 고유해야 함.
