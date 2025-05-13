@@ -68,12 +68,8 @@ jobs:
     - name: make application.properties
       if: contains(github.ref, 'main')
       run: |
-
-        cd ./src/main/resources spring의 resources 
-         # application.properties 파일 생성
+        cd ./src/main/resources 
          touch ./application.properties
-        
-         # GitHub-Actions에서 설정한 값을 application.properties 파일에 덮어씌우기
          echo "${{ secrets.PROPERTIES }}" > ./application.properties
       shell: bash
 
