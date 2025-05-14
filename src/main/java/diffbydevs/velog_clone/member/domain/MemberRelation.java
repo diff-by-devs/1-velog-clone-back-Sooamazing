@@ -37,7 +37,7 @@ public class MemberRelation extends BaseEntityOnlyCreatedAt {
 		Member follower, Member following) {
 		MemberRelation memberRelation = new MemberRelation();
 
-		memberRelation.id = MemberRelationPK.follow(follower, following);
+		memberRelation.id = MemberRelationPK.createFollowPK(follower, following);
 
 		return memberRelation;
 	}

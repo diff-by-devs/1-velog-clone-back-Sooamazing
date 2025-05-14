@@ -12,16 +12,18 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
  * 볼로그 게시글 태그의 복합 PK입니다.
  * package-private 설정해 해당 패키지 외부에서 PK에 접근할 수 없습니다.
  */
+@Getter
 @Embeddable
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(staticName = "addTagTo")
+@AllArgsConstructor(staticName = "createBlogPostTagPK")
 public class BlogPostTagPK implements Serializable {
 
 	@NotNull

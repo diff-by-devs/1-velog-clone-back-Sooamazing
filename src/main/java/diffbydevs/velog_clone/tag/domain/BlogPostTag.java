@@ -37,7 +37,7 @@ public class BlogPostTag extends BaseEntityOnlyCreatedAt {
 		Tag tag, Blog blog, Post post) {
 		BlogPostTag blogPostTag = new BlogPostTag();
 
-		blogPostTag.id = BlogPostTagPK.addTagTo(tag, blog, post);
+		blogPostTag.id = BlogPostTagPK.createBlogPostTagPK(tag, blog, post);
 
 		return blogPostTag;
 	}

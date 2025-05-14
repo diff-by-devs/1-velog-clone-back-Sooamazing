@@ -29,7 +29,7 @@ module과 package level은 동일하다고 함.
 @Embeddable
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(staticName = "follow")
+@AllArgsConstructor(staticName = "createFollowPK")
 public class MemberRelationPK implements Serializable {
 
 	@NotNull
