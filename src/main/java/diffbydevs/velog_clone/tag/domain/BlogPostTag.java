@@ -1,17 +1,10 @@
 package diffbydevs.velog_clone.tag.domain;
 
-import org.springframework.data.domain.Persistable;
-
 import diffbydevs.velog_clone.blog.domain.Blog;
 import diffbydevs.velog_clone.global.domain.BaseEntityOnlyCreatedAt;
 import diffbydevs.velog_clone.post.domain.Post;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,28 +20,10 @@ TODO
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BlogPostTag extends BaseEntityOnlyCreatedAt implements Persistable<BlogPostTagPK> {
+public class BlogPostTag extends BaseEntityOnlyCreatedAt {
 
 	@EmbeddedId
 	private BlogPostTagPK id;
-
-	@MapsId("tagId")
-	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tag_id")
-	private Tag tag;
-
-	@MapsId("blogId")
-	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "blog_id")
-	private Blog blog;
-
-	@MapsId("postId")
-	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_id")
-	private Post post;
 
 	/**
 	 * 블로그 게시글에 태그를 추가합니다.
@@ -58,22 +33,12 @@ public class BlogPostTag extends BaseEntityOnlyCreatedAt implements Persistable<
 	 * @param post 태그를 추가할 게시글
 	 * @return 블로그 게시글에 추가한 태그
 	 */
-	public static BlogPostTag addTagTo(Tag tag, Blog blog, Post post) {
+	public static BlogPostTag addTagTo(
+		Tag tag, Blog blog, Post post) {
 		BlogPostTag blogPostTag = new BlogPostTag();
 
-		blogPostTag.tag = tag;
-		blogPostTag.blog = blog;
-		blogPostTag.post = post;
+		blogPostTag.id = BlogPostTagPK.addTagTo(tag, blog, post);
 
 		return blogPostTag;
-	}
-
-	/**
-	 * GeneratedValue를 사용하지 않고 복합키 사용 시, 이미 id 값을 가지고 있어 이미 있던 entity로 판단할 수 있기에 jpa의 새로운 엔티티 판단 전략을 재정의합니다.
-	 * @return 새롭다면 true, 있던 거라면 false
-	 */
-	@Override
-	public boolean isNew() {
-		return super.getCreatedAt() == null;
 	}
 }
