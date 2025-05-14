@@ -8,9 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * {@link EntityListeners}를 사용해 생성일시를 자동으로 관리합니다.
@@ -21,12 +19,10 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @MappedSuperclass
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntityOnlyCreatedAt {
 
 	@Column(nullable = false, updatable = false)
 	@CreatedDate
 	private LocalDateTime createdAt;
-
 }

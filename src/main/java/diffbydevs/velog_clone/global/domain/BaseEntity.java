@@ -9,9 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /*
 TODO
@@ -28,7 +26,6 @@ TODO
  */
 @Getter
 @MappedSuperclass
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
@@ -39,5 +36,4 @@ public abstract class BaseEntity {
 	@Column(nullable = false)
 	@LastModifiedDate
 	private LocalDateTime updatedAt;
-
 }
