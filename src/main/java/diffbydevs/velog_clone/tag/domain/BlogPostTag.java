@@ -1,5 +1,7 @@
 package diffbydevs.velog_clone.tag.domain;
 
+import org.springframework.data.domain.Persistable;
+
 import diffbydevs.velog_clone.blog.domain.Blog;
 import diffbydevs.velog_clone.global.domain.BaseEntityOnlyCreatedAt;
 import diffbydevs.velog_clone.post.domain.Post;
@@ -20,7 +22,7 @@ TODO
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BlogPostTag extends BaseEntityOnlyCreatedAt {
+public class BlogPostTag extends BaseEntityOnlyCreatedAt implements Persistable<BlogPostTagPK> {
 
 	@EmbeddedId
 	private BlogPostTagPK id;
@@ -40,5 +42,14 @@ public class BlogPostTag extends BaseEntityOnlyCreatedAt {
 		blogPostTag.id = BlogPostTagPK.createBlogPostTagPK(tag, blog, post);
 
 		return blogPostTag;
+	}
+
+	/**
+	 * GeneratedValue를 사용하지 않고 복합키 사용 시, 이미 id 값을 가지고 있어 이미 있던 entity로 판단할 수 있기에 jpa의 새로운 엔티티 판단 전략을 재정의합니다.
+	 * @return 새롭다면 true, 있던 거라면 false
+	 */
+	@Override
+	public boolean isNew() {
+		return super.getCreatedAt() == null;
 	}
 }

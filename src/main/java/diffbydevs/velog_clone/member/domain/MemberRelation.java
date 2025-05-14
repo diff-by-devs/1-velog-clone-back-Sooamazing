@@ -1,5 +1,7 @@
 package diffbydevs.velog_clone.member.domain;
 
+import org.springframework.data.domain.Persistable;
+
 import diffbydevs.velog_clone.global.domain.BaseEntityOnlyCreatedAt;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -21,7 +23,7 @@ TODO
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberRelation extends BaseEntityOnlyCreatedAt {
+public class MemberRelation extends BaseEntityOnlyCreatedAt implements Persistable<MemberRelationPK> {
 
 	@EmbeddedId
 	private MemberRelationPK id;
@@ -40,5 +42,14 @@ public class MemberRelation extends BaseEntityOnlyCreatedAt {
 		memberRelation.id = MemberRelationPK.createFollowPK(follower, following);
 
 		return memberRelation;
+	}
+
+	/**
+	 * GeneratedValue를 사용하지 않고 복합키 사용 시, 이미 id 값을 가지고 있어 이미 있던 entity로 판단할 수 있기에 jpa의 새로운 엔티티 판단 전략을 재정의합니다.
+	 * @return 새롭다면 true, 있던 거라면 false
+	 */
+	@Override
+	public boolean isNew() {
+		return super.getCreatedAt() == null;
 	}
 }
