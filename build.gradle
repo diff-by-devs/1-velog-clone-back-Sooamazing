@@ -1,28 +1,59 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.4.5'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'diffbydevs'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // getter, Args 사용 위해 LOMBOK 추가
+    // gradle 설치: https://projectlombok.org/setup/gradle
+    // 어노테이션: https://projectlombok.org/features/
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
+
+    // entity 등 ORM 기능 사용 위해 jpa 설치
+    // https://spring.io/projects/spring-data-jpa#overview
+    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+    // implementation 'org.springframework.data:spring-data-jpa'
+    // build error: package javax.persistence does not exist
+    // (공부) data와 boot의 어떤 차이 때문에 build error나는지, data는 언제 사용하는지 공부하기.
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    // implementation 'mysql:mysql-connector-java'
+    // properties의 driver과 연동이 안 됨.
+    // (공부) mysql 버전은 내 로컬 mysql 버전과 관계 없는 건지. 내 로컬에 맞춰서 connector-j 사용.
+    // https://kimslab01.tistory.com/23
+//    implementation 'com.mysql:mysql-connector-j'
+
+    // @Size, @NotNull 등 제약 조건 사용 위해 validation 추가
+    // Hibernate에서 제공하는 @Length 내부도 보면 validation 사용하고 있음.
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // mysql 대신 H2 사용
+    runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
