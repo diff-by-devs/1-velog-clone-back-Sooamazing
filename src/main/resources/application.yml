@@ -3,7 +3,9 @@ spring:
     name: velog-clone
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    #    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    #   intelliJ 내의 datasource 기능 이용하기 위해 file로 관리, 다중 접속 허용 설정
+    url: jdbc:h2:file:./velog;MODE=MYSQL;AUTO_SERVER=TRUE
     username: sa
     password:
   h2:
