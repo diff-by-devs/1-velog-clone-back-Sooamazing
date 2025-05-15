@@ -18,6 +18,7 @@ public enum GlobalErrorCode implements ErrorCode {
 	INVALID_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 형식입니다. 요청 값을 다시 확인해 주세요."),
 	LOGIN_REQUIRED(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다."),
 	NO_PERMISSION(HttpStatus.FORBIDDEN, "권한이 없습니다. 다시 확인해 주세요."),
+	UNDISCOVERED(HttpStatus.NOT_FOUND, "요청하신 정보를 찾을 수 없습니다."),
 	INTERNAL_SERVER(HttpStatus.INTERNAL_SERVER_ERROR, "알 수 없는 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
 
 	private final HttpStatus httpStatus;
