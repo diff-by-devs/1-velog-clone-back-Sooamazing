@@ -3,7 +3,6 @@ package diffbydevs.velog_clone.global.presentation;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,19 +12,19 @@ import diffbydevs.velog_clone.global.dto.response.ApiResponse;
 import diffbydevs.velog_clone.global.exception.AbstractBaseException;
 import diffbydevs.velog_clone.global.exception.AbstractUndiscoveredException;
 import diffbydevs.velog_clone.global.exception.GlobalErrorCode;
-import diffbydevs.velog_clone.global.exception.IErrorCode;
 import diffbydevs.velog_clone.global.exception.LoginRequiredException;
 import diffbydevs.velog_clone.global.exception.NoPermissionException;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+
 /*
 TODO
 1. Exception, RuntimeException 어떤 걸 처리해야 할지, 둘 다 해야 할지 고민. 우선, RuntimeException으로 한 후, EXception해야 할 게 생기면 그때 확인해 보기로.
 2. slf4j-api 사용 위해 따로 종속성 추가 안 해도 되나? lombok에서 제공하는 것과 뭐가 다르지?
-3. mapToApiResponse? toApiResponse? map 이름을 단건 변환에 넣는 게 적절할까? -> 이건 반환값이 get으로는 적절하지 않아서 getApiResponseBy로 변경. by가 적절할까?
-
+3. mapToApiResponse? toApiResponse? map 이름을 단건 변환에 넣는 게 적절할까? -> 이건 반환값이 get으로는 적절하지 않아서 getApiResponseBy로 변경. by가
+적절할까? -> create로 변경.
+4. ErrorResponse는 PRIVATE으로 두고 싶은데, 반환값에 Errorresponse를 포함시켜야 해서 가시성 범위에 노출된다는 IDE 알림이 떠서 public으로 변경하면, 알림 사라지는데, 뭐가 더
+적절할까? -> 우선 PRivate으로 두고 나중에 확인하기로.
+5. ErrorResponse를 생성하는 건 메서드로 빼는 게 나을까? 그냥? 딱 한 번 중복이었는데.
  */
 
 /**
@@ -44,9 +43,13 @@ public class GlobalExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(exception = RuntimeException.class)
 	public ApiResponse<ErrorResponse> handleRuntimeException(RuntimeException exception) {
-		log.error("[RuntimeException] : {}", exception);
-		return ApiResponse.fail(ErrorResponse.createErrorResponseWithErrorCode(
-			GlobalErrorCode.INTERNAL_SERVER, null)
+		log.error("[RuntimeException] : ", exception);
+		return ApiResponse.fail(
+			new ErrorResponse(
+				GlobalErrorCode.INTERNAL_SERVER.name(),
+				GlobalErrorCode.INTERNAL_SERVER.getMessage(),
+				null
+			)
 		);
 	}
 
@@ -60,7 +63,7 @@ public class GlobalExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(exception = AbstractBaseException.class)
 	public ApiResponse<ErrorResponse> handleBaseException(AbstractBaseException exception) {
-		log.error("[BaseException] : {}", exception);
+		log.error("[BaseException] : ", exception);
 		return createApiResponse(exception);
 	}
 
@@ -89,8 +92,9 @@ public class GlobalExceptionHandler {
 	 */
 	private ApiResponse<ErrorResponse> createApiResponse(AbstractBaseException exception) {
 		return ApiResponse.fail(
-			ErrorResponse.createErrorResponseWithErrorCode(
-				exception.getIErrorCode(),
+			new ErrorResponse(
+				exception.getIErrorCode().name(),
+				exception.getIErrorCode().getMessage(),
 				exception.getParam()
 			)
 		);
@@ -111,50 +115,32 @@ public class GlobalExceptionHandler {
 		List<ErrorResponse> errorList = exception.getBindingResult()
 			.getFieldErrors()
 			.stream()
-			.map(
-				ErrorResponse::createValidationErrorResponseWithFieldError)
+			.map(fieldError ->
+				new ErrorResponse(
+					GlobalErrorCode.INVALID_REQUEST.name(),
+					fieldError.getDefaultMessage(),
+					fieldError.getField()
+				))
 			.toList();
-
 		return ApiResponse.fail(errorList);
 	}
 
 	/**
-	 * API 요청 실패 시 오류 정보를 담습니다.
+	 * API 요청 실패 시 사용자에게 알려줄 오류 정보를 담습니다.
 	 */
-	@Getter
-	@AllArgsConstructor(access = AccessLevel.PRIVATE)
-	public static class ErrorResponse {
-		/**
-		 * 오류를 식별할 수 있는 오류 이름
+	private record ErrorResponse(
+		/*
+		  오류를 식별할 수 있는 오류 이름
 		 */
-		private final String name;
-		/**
-		 * 오류에 대한 설명
+		String name,
+		/*
+		  오류에 대한 설명
 		 */
-		private final String message;
-		/**
-		 * 사용자가 보낸 내용 중 오류가 발생한 파라미터
+		String message,
+		/*
+		  사용자가 보낸 내용 중 오류가 발생한 파라미터
 		 */
-		private final String param;
-
-		/**
-		 * ErrorCode에 정의된 오류 이름과 메시지를 사용하여 ErrorResponse를 생성합니다.
-		 * @param IErrorCode 오류 코드
-		 * @param param 오류가 발생한 파라미터
-		 * @return ErrorResponse 객체
-		 */
-		public static ErrorResponse createErrorResponseWithErrorCode(IErrorCode IErrorCode, String param) {
-			return new ErrorResponse(IErrorCode.name(), IErrorCode.getMessage(), param);
-		}
-
-		/**
-		 * &#064;Valid 어노테이션 검증 오류 값을 이용해 ErrorResponse를 생성합니다.
-		 * @param fieldError 해당 필드에서 발생한 오류
-		 * @return ErrorResponse 객체
-		 */
-		public static ErrorResponse createValidationErrorResponseWithFieldError(FieldError fieldError) {
-			return new ErrorResponse(GlobalErrorCode.INVALID_REQUEST.name(),
-				fieldError.getDefaultMessage(), fieldError.getField());
-		}
+		String param
+	) {
 	}
 }
