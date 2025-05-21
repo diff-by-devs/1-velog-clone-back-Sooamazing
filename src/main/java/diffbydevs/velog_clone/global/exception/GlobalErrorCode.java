@@ -14,7 +14,7 @@ TODO
  * 어플리케이션에서 사용하는 코드임을 구분하기 위해 기존 HttpStatus의 의도는 담지만, 상이한 단어를 사용합니다.
  */
 @Getter
-public enum GlobalErrorCode implements ErrorCode {
+public enum GlobalErrorCode implements IErrorCode {
 	INVALID_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 형식입니다. 요청 값을 다시 확인해 주세요."),
 	LOGIN_REQUIRED(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다."),
 	NO_PERMISSION(HttpStatus.FORBIDDEN, "권한이 없습니다. 다시 확인해 주세요."),

@@ -11,13 +11,13 @@ TODO Exception, RuntimeException 두 개의 차이는? 만약 Exception 상속 �
  * 어플리케이션 예외를 명확하게 하기 위해 상속받아 사용합니다.
  */
 @Getter
-public abstract class BaseException extends RuntimeException {
-	private final ErrorCode errorCode;
+public abstract class AbstractBaseException extends RuntimeException {
+	private final IErrorCode IErrorCode;
 	private final String param;
 
-	protected BaseException(ErrorCode errorCode, String param, String errorMessage) {
+	protected AbstractBaseException(IErrorCode IErrorCode, String param, String errorMessage) {
 		super(errorMessage);
-		this.errorCode = errorCode;
+		this.IErrorCode = IErrorCode;
 		this.param = param;
 	}
 }

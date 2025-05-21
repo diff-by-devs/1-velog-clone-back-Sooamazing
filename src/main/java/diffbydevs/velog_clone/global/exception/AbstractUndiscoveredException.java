@@ -6,8 +6,8 @@ package diffbydevs.velog_clone.global.exception;
  * 특정 리소스에 대한 예외을 처리하기 위해 상속하여 사용합니다.
  * @see org.springframework.http.HttpStatus#NOT_FOUND
  */
-public abstract class UndiscoveredException extends BaseException {
-	protected UndiscoveredException(String param, String errorMessage) {
+public abstract class AbstractUndiscoveredException extends AbstractBaseException {
+	protected AbstractUndiscoveredException(String param, String errorMessage) {
 		super(GlobalErrorCode.UNDISCOVERED, param, errorMessage);
 	}
 }

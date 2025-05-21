@@ -5,7 +5,7 @@ package diffbydevs.velog_clone.global.exception;
  * 기본적으로 HTTP 상태 코드 401에 대응됩니다.
  * @see org.springframework.http.HttpStatus#UNAUTHORIZED
  */
-public class LoginRequiredException extends BaseException {
+public class LoginRequiredException extends AbstractBaseException {
 	public LoginRequiredException(String param, String errorMessage) {
 		super(GlobalErrorCode.LOGIN_REQUIRED, param, errorMessage);
 	}
