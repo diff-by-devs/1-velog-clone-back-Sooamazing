@@ -52,6 +52,11 @@ dependencies {
 
     // mysql 대신 H2 사용
     runtimeOnly 'com.h2database:h2'
+
+    // 5/14 Errorcode에서 HttpStatus 사용 위해 의존성 추가
+    // https://spring.io/guides/tutorials/rest
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
 }
 
 tasks.named('test') {
