@@ -107,10 +107,6 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(exception = MethodArgumentNotValidException.class)
 	public ApiResponse<List<ErrorResponse>> handleMethodArgumentNotValidException(
 		MethodArgumentNotValidException exception) {
-		log.error(
-			"@Valid 확인 : {}",
-			exception.getMessage()
-		);
 
 		List<ErrorResponse> errorList = exception.getBindingResult()
 			.getFieldErrors()
