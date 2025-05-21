@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### package files ###
+*.jar
+
+### db files ###
+*.db
