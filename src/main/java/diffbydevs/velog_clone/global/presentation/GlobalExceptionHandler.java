@@ -23,7 +23,7 @@ TODO
 3. mapToApiResponse? toApiResponse? map 이름을 단건 변환에 넣는 게 적절할까? -> 이건 반환값이 get으로는 적절하지 않아서 getApiResponseBy로 변경. by가
 적절할까? -> create로 변경.
 4. ErrorResponse는 PRIVATE으로 두고 싶은데, 반환값에 Errorresponse를 포함시켜야 해서 가시성 범위에 노출된다는 IDE 알림이 떠서 public으로 변경하면, 알림 사라지는데, 뭐가 더
-적절할까? -> 우선 PRivate으로 두고 나중에 확인하기로.
+적절할까? -> 우선 경고 없애기로 했으니 public.
 5. ErrorResponse를 생성하는 건 메서드로 빼는 게 나을까? 그냥? 딱 한 번 중복이었는데.
  */
 
@@ -128,7 +128,7 @@ public class GlobalExceptionHandler {
 	/**
 	 * API 요청 실패 시 사용자에게 알려줄 오류 정보를 담습니다.
 	 */
-	private record ErrorResponse(
+	public record ErrorResponse(
 		/*
 		  오류를 식별할 수 있는 오류 이름
 		 */
